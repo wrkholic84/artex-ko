@@ -104,7 +104,12 @@ ARTEX 는 **자신이 소유하거나 서면으로 명시적 허가를 받은 �
 git clone https://github.com/jiwoochris/artex-ko.git
 cd artex-ko
 cp .env.example .env          # POSTGRES_PASSWORD 설정, ANTHROPIC_API_KEY 는 선택
-docker compose up -d          # artex 이미지 + postgres 를 함께 기동
+docker compose \
+  -f docker-compose.yml \
+  -f docker-compose.ghcr.yml \
+  up -d
+  
+# docker compose up -d          # artex 이미지 + postgres 를 함께 기동
 # → http://localhost:8787 접속 (처음 들어가면 /setup 에서 관리자 비밀번호 설정)
 #   /setup 은 기동 로그에 찍힌 "설정 토큰"을 요구합니다: docker compose logs artex | grep '설정 토큰'
 ```
